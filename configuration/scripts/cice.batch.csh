@@ -429,6 +429,23 @@ cat >> ${jobfile} << EOFB
 ##SBATCH --mail-user=xxx@noaa.gov
 EOFB
 
+else if (${ICE_MACHINE} =~ gaeac7*) then
+cat >> ${jobfile} << EOFB
+#SBATCH -J ${ICE_CASENAME}
+#SBATCH --partition=batch
+#SBATCH --qos=${queue}
+#SBATCH --account=${acct}
+#SBATCH --clusters=c7
+#SBATCH --time=${batchtime}
+#SBATCH --nodes=${nnodes}
+#SBATCH --ntasks-per-node=${taskpernodelimit}
+#SBATCH --cpus-per-task=${nthrds}
+#SBATCH -e slurm%j.err
+#SBATCH -o slurm%j.out
+##SBATCH --mail-type FAIL
+##SBATCH --mail-user=xxx@noaa.gov
+EOFB
+
 else if (${ICE_MACHINE} =~ hera*) then
 cat >> ${jobfile} << EOFB
 #SBATCH -J ${ICE_CASENAME}
